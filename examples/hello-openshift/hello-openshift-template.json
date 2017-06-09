@@ -1,0 +1,105 @@
+
+{
+  "apiVersion": "v1",
+  "kind": "Template",
+  "metadata": {
+    "name": "hello-openshift",
+    "annotations": {
+      "description": "Hello Openshift Template",
+      "tags": "template, hello-openshift"
+    }
+  },
+  "objects": [
+    { 
+	  "kind": "Pod",
+	  "apiVersion": "v1",
+	  "metadata": {
+	    "name": "hello-openshift-pod",
+	    "creationTimestamp": null,
+	    "labels": {
+	      "app": "hello-openshift"
+	    }
+	  },
+	  "spec": {
+	    "containers": [
+	      {
+		"name": "hello-openshift",
+		"image": "openshift/hello-openshift",
+		"env": [
+		  { "name": "RESPONSE",
+		    "value": "Hello World!"
+		  }
+		],
+		"ports": [
+		  {
+		    "containerPort": 8080,
+		    "protocol": "TCP"
+		  }
+		],
+		"resources": {},
+		"volumeMounts": [
+		  {
+		    "name":"tmp",
+		    "mountPath":"/tmp"
+		  }
+		],
+		"terminationMessagePath": "/dev/termination-log",
+		"imagePullPolicy": "IfNotPresent",
+		"capabilities": {},
+		"securityContext": {
+		  "capabilities": {},
+		  "privileged": false
+		}
+	      }
+	    ],
+	    "volumes": [
+	      {
+		"name":"tmp",
+		"emptyDir": {}
+	      }
+	    ],
+	    "restartPolicy": "Always",
+	    "dnsPolicy": "ClusterFirst",
+	    "serviceAccount": ""
+	  },
+	  "status": {}
+    },
+    {
+	"kind": "Route",
+        "apiVersion": "v1",
+        "metadata": { 
+		"name": "hello-openshift-route",
+		"labels": {
+			"app": "hello-openshift"
+		}
+	},
+        "spec": {
+           "path": "/",
+           "to": {
+              "name": "hello-openshift-service",
+              "kind": "Service"
+           }
+        }
+    }, 
+    {
+	"kind": "Service",
+        "apiVersion": "v1",
+        "metadata": { 
+		"name": "hello-openshift-service",
+		"labels": {
+			"app": "hello-openshift"
+		}
+	},
+        "type": "NodePort",
+        "spec": {
+           "selector": {
+               "app": "hello-openshift"
+           },
+           "ports": [
+		{ "port": 8080, "protocol": "TCP", "targetPort": 8080 } ]
+		
+        }
+    }
+  ]
+
+}
