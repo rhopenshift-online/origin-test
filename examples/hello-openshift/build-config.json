@@ -7,13 +7,13 @@ spec:
   source: 
     git:
       uri: "https://github.com/rhopenshift-online/origin-test"
-  strategy: 
+  strategy:
     sourceStrategy:
       from:
         kind: "ImageStreamTag"
-        name: "busybox:latest"
+        name: "mybusybox:latest"
   output: 
     to:
       kind: "ImageStreamTag"
-      name: "test:latest"
+      name: "busybox:latest"
 

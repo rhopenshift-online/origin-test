@@ -1,6 +1,3 @@
-FROM scratch
-MAINTAINER Jessica Forrester <jforrest@redhat.com>
-#COPY bin/hello-openshift /hello-openshift
-COPY hello_openshift.go /hello-openshift
-EXPOSE 8080 8888
-ENTRYPOINT ["/hello-openshift"]
+FROM busybox:latest
+MAINTAINER Richard Robinson <rrobinso@redhat.com>
+USER 1
