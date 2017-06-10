@@ -1,0 +1,4 @@
+!#/bin/sh
+
+touch /var/log/test-build.log
+echo "save-artifacts run" >> /var/log/test-build.log

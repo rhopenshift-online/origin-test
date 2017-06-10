@@ -1,2 +1,4 @@
 #!/bin/sh
-echo "assemble script run"
+
+touch /var/log/test-build.log
+echo "assemble run" >> /var/log/test-build.log

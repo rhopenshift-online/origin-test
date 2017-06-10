@@ -1,3 +1,4 @@
 !#/bin/sh
 
-echo "run script run"
+touch /var/log/test-build.log
+echo "run script run" >> /var/log/test-build.log
