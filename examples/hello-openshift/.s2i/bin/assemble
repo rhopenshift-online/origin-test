@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "assemble script run"
