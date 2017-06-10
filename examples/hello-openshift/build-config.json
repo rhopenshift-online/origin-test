@@ -12,6 +12,7 @@ spec:
       from:
         kind: "ImageStreamTag"
         name: "mybusybox:latest"
+      forcePull: true
   output: 
     to:
       kind: "ImageStreamTag"
